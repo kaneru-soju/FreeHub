@@ -1,2 +1,3 @@
-# foreveremembrance
-An app that utilizes tasks created by a user to automate important actions on events, taking it a step further from just a reminder!
+# FreeHub
+An app centralizes information about free products and provides it to everyone.
+![FreeHub](https://github.com/kaneru-soju/FreeHub/blob/main/FreeHubLogo.jpg)
