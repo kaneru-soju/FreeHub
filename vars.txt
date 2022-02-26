@@ -1,0 +1,13 @@
+{'author': Redditor(name='Tanvirhasants12'),
+ 'created': 1645721640.0,
+ 'created_utc': 1645721640.0,
+ 'domain': 'epicgames.com',
+ 'link_flair_css_class': 'expired',
+ 'link_flair_richtext': [{'e': 'text', 't': '[EXPIRED]'}],
+ 'link_flair_text': '[EXPIRED]',
+ 'thumbnail': 'https://a.thumbs.redditmedia.com/TfQTJj5WzUUO-QFgEvR3IIZSFRjqPi1cbrnQ9S0Uvq4.jpg',
+ 'title': '[Epic Games](Game) Cris Tales',
+ 'ups': 99,
+ 'upvote_ratio': 0.91,
+ 'url': 'https://www.epicgames.com/store/p/cris-tales',
+}
