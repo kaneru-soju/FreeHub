@@ -143,5 +143,4 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-bot-env/
 config.py
