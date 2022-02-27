@@ -1,8 +1,11 @@
+import asyncio
 from datetime import date, datetime
-from pprint import pprint
+from random import randint
+
 import praw
 from FreebieInfo import FreebieInfo
 from config import personal_use, secret, username, user_agent, password
+
 
 class subreddit:
 
@@ -22,13 +25,14 @@ class utils:
         self.client: praw.Reddit = praw.Reddit(client_id=personal_use, client_secret=secret, user_agent=user_agent,
                                                username=username, password=password)
 
-
     async def start_sending_posts(self):
         for submission in self.client.subreddit(self.subreddits).stream.submissions():
             created_at = datetime.fromtimestamp(submission.created_utc)
             now = datetime.utcnow()
             # call the bot.
             if (now - created_at).seconds > (5 * 60):
-            # print(submission.subreddit_name_prefixed.split('/')[1])
-                await self.dclient.post_freebie(FreebieInfo(submission.title, submission.thumbnail, submission.url, submission.link_flair_css_class))
-
+                post_subreddit = submission.subreddit_name_prefixed.split('/')[1]
+                await self.dclient.post_freebie(FreebieInfo(submission.title, submission.thumbnail, submission.url,
+                                                            submission.link_flair_css_class, post_subreddit,
+                                                            submission.upvote_ratio))
+                await asyncio.sleep(randint(2, 5))
