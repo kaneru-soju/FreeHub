@@ -2,6 +2,7 @@
 # import praw
 # import pandas as pd
 # import datetime as dt
+from re import sub
 import scraper
 #
 # # secret keys that we need to hide
@@ -27,11 +28,11 @@ import scraper
 # for submission in top_subreddit:
 #     print(submission.title, submission.id)
 
-subreddit = [scraper.SubReddit("freebies", ["[EXPIRED]"], 0.80)]
-             # scraper.SubReddit("freebies", ["[EXPIRED]"]),
-             # scraper.SubReddit("freebies", ["[EXPIRED]"]),
-             # scraper.SubReddit("freebies", ["[EXPIRED]"])]
+subreddit = [scraper.subreddit("freebies", ["[EXPIRED]"], 0.80),
+             scraper.subreddit("freegamefindings", ["Expired"], 0.80),
+             scraper.subreddit("freestickers", ["EXPIRED"], 0.80),
+             scraper.subreddit("freeebooks", ["Expired"], 0.80)]
 
-scraper = scraper.Scraper(subreddit)
-
-scraper.get_valid_posts(subreddit[0])
+for sr in subreddit:
+    data_harvester = scraper.utils(sr)
+    data_harvester.start_sending_posts("freebies+freegamefindings+freestickers+freeebooks")

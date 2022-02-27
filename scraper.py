@@ -2,7 +2,7 @@ import praw
 from config import personal_use, secret, username, user_agent, password
 
 
-class SubReddit:
+class subreddit:
 
     def __init__(self, name, banned_flairs, ts):
         self.name = name
@@ -10,7 +10,7 @@ class SubReddit:
         self.upvote_threshold = ts
 
 
-class Scraper:
+class utils:
 
     # subreddit object
     # exclusion flair, etc.,
@@ -19,21 +19,13 @@ class Scraper:
         self.client: praw.Reddit = praw.Reddit(client_id=personal_use, client_secret=secret, user_agent=user_agent,
                                                username=username, password=password)
 
-    @staticmethod
-    def post_is_valid(subreddit, post):
-        if post.link_flair_text in subreddit.banned_flairs:
-            return False
 
-        return post.upvote_ratio >= subreddit.upvote_threshold
-
-    def get_valid_posts(self, subreddit: SubReddit):
-        sub = self.client.subreddit(subreddit.name)
-        hourly = sub.top("hour")
-
+    def start_sending_posts(self, reddits):
+        sub = self.client.subreddit(reddits)
         valid_posts = []
-        for post in hourly:
-            if self.post_is_valid(subreddit, post):
-                # for now just append the name and and print
-                valid_posts.append(post.name)
+
+        for submission in sub.stream.submissions():
+            # call the bot.
+            pass
 
         print(valid_posts)
