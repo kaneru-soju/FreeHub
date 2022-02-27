@@ -9,6 +9,7 @@ import discord
 import asyncio
 import FreebieInfo
 import scraper
+import validators
 
 from config import token
 
@@ -21,7 +22,6 @@ class freehub_bot(discord.Client):
         self.ping_role = None
 
     async def on_ready(self):
-
 
         print("FreeHub started")
 
@@ -48,7 +48,17 @@ class freehub_bot(discord.Client):
         if self.pings:
             await self.channel.send(f"<@{self.ping_role}> Here's a freebie! \n {data.__str__()}")
         else:
-            await self.channel.send(f"Here's a freebie! \n {data.__str__()}")
+
+            embedVar = discord.Embed(title=data.get_title(), url=data.get_link(), description=data.get_information(),
+                                  color=discord.Color.green())
+
+            if validators.url(data.get_image()):
+                embedVar.set_thumbnail(url=data.get_image())
+            else:
+                embedVar.set_thumbnail(url="book.jpg")
+
+            await self.channel.send(embed=embedVar)
+
 
 client = freehub_bot()
 client.run(token)
