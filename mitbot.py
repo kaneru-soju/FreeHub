@@ -88,12 +88,12 @@ class freehub_bot(discord.Client):
             else:
                 if sr == "freeebooks":
                     embedVar.set_thumbnail(url="https://raw.githubusercontent.com/kaneru-soju/FreeHub/main/book.jpg")
-                elif sr == "freegames":
-
+                elif sr == "freegamefindings":
+                    embedVar.set_thumbnail(url="https://github.com/kaneru-soju/FreeHub/blob/main/game.png?raw=true")
                 elif sr == "freestickers":
-
+                    embedVar.set_thumbnail(url="https://github.com/kaneru-soju/FreeHub/blob/main/sticker.png?raw=true")
                 elif sr == "freebies":
-
+                    embedVar.set_thumbnail(url="https://github.com/kaneru-soju/FreeHub/blob/main/freebie.png?raw=true")
             await self.channel.send(embed=embedVar)
 
 
