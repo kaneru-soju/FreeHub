@@ -28,10 +28,13 @@ class freehub_bot(discord.Client):
     async def on_message(self, message: discord.Message):
         if "!role" in message.content:
             self.ping_role = message.content[6:]
-            await message.channel.send("Kaneru is so hot role")
+            await message.channel.send("Role was set!")
         elif "!ping" in message.content:
             self.pings = not self.pings
-            await message.channel.send("Kaneru is so hot ping")
+            if self.pings:
+                await message.channel.send("Ping's are now enabled!")
+            else:
+                await message.channel.send("Ping's are now disabled!")
         elif "!channel" in message.content:
             self.channel = message.channel
             await message.channel.send("Kaneru is so hot channel")
