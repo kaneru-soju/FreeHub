@@ -8,6 +8,7 @@ Created on Sat Feb 26 11:14:10 2022
 import discord
 import asyncio
 import FreebieInfo
+import scraper
 
 from config import token
 
@@ -20,6 +21,8 @@ class freehub_bot(discord.Client):
         self.ping_role = None
 
     async def on_ready(self):
+
+
         print("FreeHub started")
 
     async def on_message(self, message: discord.Message):
@@ -32,13 +35,17 @@ class freehub_bot(discord.Client):
         elif "!channel" in message.content:
             self.channel = message.channel
             await message.channel.send("Kaneru is so hot channel")
+        elif "!*" in message.content:
+            self.channel = message.channel
+            sr = "freebies+freegamefindings+freestickers+freeebooks"
+            data_harvester = scraper.utils(self, sr)
+            await data_harvester.start_sending_posts()
 
     async def post_freebie(self, data: FreebieInfo):
         if self.pings:
             await self.channel.send(f"<@{self.ping_role}> Here's a freebie! \n {data.__str__()}")
         else:
             await self.channel.send(f"Here's a freebie! \n {data.__str__()}")
-
 
 client = freehub_bot()
 client.run(token)
