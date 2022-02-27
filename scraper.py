@@ -19,20 +19,13 @@ class utils:
         self.client: praw.Reddit = praw.Reddit(client_id=personal_use, client_secret=secret, user_agent=user_agent,
                                                username=username, password=password)
 
-    @staticmethod
-    def post_is_valid(subreddit, post):
-        if post.link_flair_text in subreddit.banned_flairs:
-            return False
 
-        return post.upvote_ratio >= subreddit.upvote_threshold
-
-    def get_valid_posts(self, subreddit: subreddit):
-        sub = self.client.subreddit(subreddit.name)
-
+    def start_sending_posts(self, reddits):
+        sub = self.client.subreddit(reddits)
         valid_posts = []
+
         for submission in sub.stream.submissions():
-            if self.post_is_valid(subreddit, submission):
-                # for now just append the name and and print
-                valid_posts.append(submission.title)
+            # call the bot.
+            pass
 
         print(valid_posts)

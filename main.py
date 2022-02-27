@@ -35,4 +35,4 @@ subreddit = [scraper.subreddit("freebies", ["[EXPIRED]"], 0.80),
 
 for sr in subreddit:
     data_harvester = scraper.utils(sr)
-    data_harvester.get_valid_posts(sr)
+    data_harvester.start_sending_posts("freebies+freegamefindings+freestickers+freeebooks")
