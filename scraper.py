@@ -2,7 +2,7 @@ import praw
 from config import personal_use, secret, username, user_agent, password
 
 
-class SubReddit:
+class subreddit:
 
     def __init__(self, name, banned_flairs, ts):
         self.name = name
@@ -10,7 +10,7 @@ class SubReddit:
         self.upvote_threshold = ts
 
 
-class Scraper:
+class utils:
 
     # subreddit object
     # exclusion flair, etc.,
@@ -26,14 +26,13 @@ class Scraper:
 
         return post.upvote_ratio >= subreddit.upvote_threshold
 
-    def get_valid_posts(self, subreddit: SubReddit):
+    def get_valid_posts(self, subreddit: subreddit):
         sub = self.client.subreddit(subreddit.name)
-        hourly = sub.top("hour")
 
         valid_posts = []
-        for post in hourly:
-            if self.post_is_valid(subreddit, post):
+        for submission in sub.stream.submissions():
+            if self.post_is_valid(subreddit, submission):
                 # for now just append the name and and print
-                valid_posts.append(post.name)
+                valid_posts.append(submission.title)
 
         print(valid_posts)
